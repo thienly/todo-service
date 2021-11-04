@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+option go_package= "pkg/api/v1/todoservice";
+option csharp_namespace = "TodoService";
+
+message UUID {
+  string value = 1;
+}
+message Todo{
+  UUID id = 1;
+  string name = 2;
+  bool done = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+message TodoRequest {
+  Todo todo = 1;
+}
+message TodoResponse {
+  string id = 1;
+}
+message  TodoList {
+  repeated Todo data = 1;
+}
+message Void{}
+service TodoService {
+  rpc Create(TodoRequest) returns (TodoResponse);
+  rpc GetAll(Void) returns (TodoList);
+}
