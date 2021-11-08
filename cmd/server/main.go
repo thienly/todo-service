@@ -33,13 +33,13 @@ func main(){
 		log.Fatalf("Failed to load certificate %v", err)
 	}
 	s:= grpc.NewServer(grpc.Creds(transportCredentials))
-	client, err := connectDb("mongodb://rootuser:rootpassword@localhost:27017")
+	//client, err := connectDb("mongodb://rootuser:rootpassword@localhost:27017")
 	if err != nil {
 		panic("can not connect to database")
 	}
-	db :=client.Database("oms-integration")
-	producer:= newProducer()
-	todoservice.RegisterTodoServiceServer(s, v1.NewTodoServiceServer(db,producer))
+	//db :=client.Database("oms-integration")
+	//producer:= newProducer()
+	todoservice.RegisterTodoServiceServer(s, v1.NewTodoServiceServer(nil, nil))
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
