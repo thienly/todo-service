@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"google.golang.org/protobuf/proto"
 	"os"
 	"os/signal"
 	"syscall"
-	todoservice "todo-service/pkg/api/v1"
+	todoservice "todo-service/pb"
+
+	"github.com/confluentinc/confluent-kafka-go/kafka"
+	"google.golang.org/protobuf/proto"
 )
 
 func main() {

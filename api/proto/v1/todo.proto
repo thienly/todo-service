@@ -1,6 +1,7 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
-option go_package= "pkg/api/v1/todoservice";
+import "google/api/annotations.proto";
+option go_package = ".;pb";
 option csharp_namespace = "TodoService";
 
 message UUID {
@@ -23,6 +24,16 @@ message  TodoList {
 }
 message Void{}
 service TodoService {
-  rpc Create(TodoRequest) returns (TodoResponse);
+  rpc Create(TodoRequest) returns (TodoResponse){
+    option (google.api.http) = {
+      post: "/v1/bookings"
+      body: "*"
+    };
+  };
   rpc GetAll(Void) returns (TodoList);
+  rpc Sample(Void) returns (TodoResponse) {
+    option (google.api.http) = {
+      get:"/v1/bookings"
+    };
+  }
 }

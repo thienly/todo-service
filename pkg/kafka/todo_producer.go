@@ -5,7 +5,7 @@ import (
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/golang/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	todoservice "todo-service/pkg/api/v1"
+	todoservice "todo-service/pb"
 	"todo-service/pkg/domain"
 )
 

@@ -7,9 +7,8 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
-	"google.golang.org/protobuf/types/known/timestamppb"
 	"io/ioutil"
-	todoservice "todo-service/pkg/api/v1"
+	todoservice "todo-service/pb"
 )
 
 func main(){
@@ -21,13 +20,14 @@ func main(){
 	}
 
 	todoClient := todoservice.NewTodoServiceClient(conn)
-	request := &todoservice.TodoRequest{Todo: &todoservice.Todo{
-		Id:        &todoservice.UUID{Value: "123"},
-		Name:      "Test",
-		Done:      false,
-		CreatedAt: timestamppb.Now(),
-	}}
-	response, err:= todoClient.Create(context.Background(), request)
+	//request := &todoservice.TodoRequest{Todo: &todoservice.Todo{
+	//	Id:        &todoservice.UUID{Value: "123"},
+	//	Name:      "Test",
+	//	Done:      false,
+	//	CreatedAt: timestamppb.Now(),
+	//}}
+	//response, err:= todoClient.Create(context.Background(), request)
+	response, err:= todoClient.Sample(context.Background(), &todoservice.Void{})
 	if err != nil{
 		fmt.Printf("error while calling %v", err)
 	}

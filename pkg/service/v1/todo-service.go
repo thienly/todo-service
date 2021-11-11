@@ -6,7 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
-	todoservice "todo-service/pkg/api/v1"
+	todoservice "todo-service/pb"
 	"todo-service/pkg/domain"
 	message "todo-service/pkg/kafka"
 	"todo-service/pkg/repository"
@@ -19,6 +19,7 @@ type todoServiceServer struct {
 }
 
 func (t *todoServiceServer) Create(ctx context.Context, request *todoservice.TodoRequest) (*todoservice.TodoResponse, error) {
+	return &todoservice.TodoResponse{Id: primitive.NewObjectID().String()}, nil
 	todo:= request.Todo
 	domainTodo := &domain.Todo{
 		Id:    primitive.NewObjectID(),
@@ -54,6 +55,9 @@ func (t *todoServiceServer)	 GetAll(ctx context.Context, empty *todoservice.Void
 		})
 	}
 	return &result, nil
+}
+func (t *todoServiceServer)  Sample(ctx context.Context, emp *todoservice.Void) (*todoservice.TodoResponse, error){
+	return &todoservice.TodoResponse{Id: primitive.NewObjectID().String()}, nil
 }
 
 func (t todoServiceServer) mustEmbedUnimplementedTodoServiceServer() {
